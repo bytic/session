@@ -2,7 +2,7 @@
 
 namespace Nip\Session\Tests\Middleware;
 
-use Nip\Application;
+use Nip\Application\Application;
 use Nip\Http\Response\Response;
 use Nip\Http\ServerMiddleware\Dispatcher;
 use Nip\Request;

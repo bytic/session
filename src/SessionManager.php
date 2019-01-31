@@ -2,7 +2,7 @@
 
 namespace Nip\Session;
 
-use Nip\Application;
+use Nip\Application\Application;
 use Nip\Cookie\Jar as CookieJar;
 
 /**
