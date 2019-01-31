@@ -1,6 +1,6 @@
 <?php
 
-namespace Nip\Locale\Tests;
+namespace Nip\Session\Tests;
 
 use PHPUnit\Framework\TestCase;
 

@@ -2,26 +2,32 @@
 
 namespace Nip\Session;
 
-use Nip\Container\ServiceProvider\AbstractSignatureServiceProvider;
+use Nip\Container\ServiceProviders\Providers\AbstractSignatureServiceProvider;
+use Nip\Session\Middleware\StartSession;
 
 /**
- * Class SessionServiceProvider
- * @package Nip\Session
+ * Class MailServiceProvider
+ * @package Nip\Mail
  */
 class SessionServiceProvider extends AbstractSignatureServiceProvider
 {
-
     /**
      * @inheritdoc
      */
     public function register()
     {
-        $this->registerLocale();
+        $this->registerSessionManager();
+        $this->getContainer()->share(StartSession::class);
     }
 
-    protected function registerLocale()
+    /**
+     * Register the session manager instance.
+     *
+     * @return void
+     */
+    protected function registerSessionManager()
     {
-//        $this->getContainer()->singleton('session', Locale::class);
+        $this->getContainer()->share('session', SessionManager::class);
     }
 
     /**
