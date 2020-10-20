@@ -1,7 +1,7 @@
-
-
-tests/_output/*
-vendor/*
 .idea/workspace.xml
-/.idea/usage.statistics.xml
+.idea/usage.statistics.xml
+
+vendor/*
+tests/_output/*
+
 composer.lock
