@@ -1,14 +1,13 @@
 <?php
 
-namespace Nip\Session\Tests\Middleware;
+namespace Nip\Session\Tests\src\Middleware;
 
-use Nip\Application\Application;
+use Nip\Http\Request;
 use Nip\Http\Response\Response;
 use Nip\Http\ServerMiddleware\Dispatcher;
-use Nip\Request;
 use Nip\Session\Middleware\StartSession;
 use Nip\Session\SessionManager;
-use Nip\Session\Tests\AbstractTest;
+use Nip\Session\Tests\src\AbstractTest;
 
 /**
  * Class DebugbarMiddlewareTest
@@ -18,13 +17,15 @@ class StartSessionTest extends AbstractTest
 {
     public function testProcess()
     {
-        $sessionManager = new SessionManager(new Application());
+        $sessionManager = new SessionManager();
 
         $dispatcher = new Dispatcher(
             [
                 new StartSession($sessionManager),
                 function () {
-                    return (new Response())->setContent('test');
+                    $response = new Response();
+                    $response->setContent('Hello World');
+                    return $response;
                 },
             ]
         );

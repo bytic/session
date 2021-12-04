@@ -2,9 +2,7 @@
 
 namespace Nip\Session\Middleware;
 
-use Nip\Cookie\Jar as CookieJar;
 use Nip\Http\ServerMiddleware\Middlewares\ServerMiddlewareInterface;
-use Nip\Request;
 use Nip\Session\SessionManager;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -34,7 +32,7 @@ class StartSession implements ServerMiddlewareInterface
     /**
      * Create a new session middleware.
      *
-     * @param  SessionManager $manager
+     * @param SessionManager $manager
      */
     public function __construct(SessionManager $manager)
     {
@@ -46,6 +44,10 @@ class StartSession implements ServerMiddlewareInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
+        if ($this->sessionHandled) {
+            return $handler->handle($request);
+        }
+
         $this->sessionHandled = true;
         $this->startSession($request);
 
@@ -55,27 +57,36 @@ class StartSession implements ServerMiddlewareInterface
     /**
      * Start the session for the given request.
      *
-     * @param  ServerRequestInterface|Request $request
+     * @param ServerRequestInterface $request
      */
     protected function startSession(ServerRequestInterface $request)
     {
-        if ($request->isCLI() == false) {
-            $requestHTTP = $request->getHttp();
-            $domain = $requestHTTP->getRootDomain();
-            $sessionManager = $this->getManager();
+        $request->setSessionFactory(
+            function () use ($request) {
+                $session = $this->manager->getSession();
+                if ($request->isCLI() == false) {
+                    $requestHTTP = $request->getHttp();
+                    $domain = $requestHTTP->getRootDomain();
 
-            if (!$sessionManager->isAutoStart()) {
-                $sessionManager->setRootDomain($domain);
-//                $sessionManager->setLifetime(config('SESSION.lifetime'));
+//            if (!$sessionManager->isAutoStart()) {
+//                $sessionManager->setRootDomain($domain);
+////                $sessionManager->setLifetime(config('SESSION.lifetime'));
+//            }
+//
+//            if ($domain != 'localhost') {
+//                CookieJar::instance()->setDefaults(
+//                    ['domain' => '.' . $domain]
+//                );
+//            }
+//            $sessionManager->init();
+                }
+                if ($session && !$session->isStarted()) {
+                    $sessionId = $request->cookies->get($session->getName(), '');
+                    $session->setId($sessionId);
+                }
+                return $session;
             }
-
-            if ($domain != 'localhost') {
-                CookieJar::instance()->setDefaults(
-                    ['domain' => '.' . $domain]
-                );
-            }
-            $sessionManager->init();
-        }
+        );
     }
 
     /**

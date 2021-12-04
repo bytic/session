@@ -11,6 +11,8 @@ use Nip\Session\Middleware\StartSession;
  */
 class SessionServiceProvider extends AbstractSignatureServiceProvider
 {
+    public const SERVICE_START = 'session';
+
     /**
      * @inheritdoc
      */
@@ -27,14 +29,14 @@ class SessionServiceProvider extends AbstractSignatureServiceProvider
      */
     protected function registerSessionManager()
     {
-        $this->getContainer()->share('session', SessionManager::class);
+        $this->getContainer()->share(self::SERVICE_START, SessionManager::class);
     }
 
     /**
      * @inheritdoc
      */
-    public function provides()
+    public function provides(): array
     {
-        return ['session'];
+        return [self::SERVICE_START];
     }
 }

@@ -2,30 +2,14 @@
 
 namespace Nip\Session;
 
-use Nip\Application\Application;
-use Nip\Cookie\Jar as CookieJar;
-
 /**
  * Class SessionManager
  * @package Nip\Session
  */
 class SessionManager
 {
-    protected $id;
-
-    protected $_lifetime;
-
-    /**
-     * SessionManager constructor.
-     * @param Application $app
-     */
-    public function __construct(Application $app)
-    {
-        $this->_lifetime = get_cfg_var("session.gc_maxlifetime");
-
-        //		ini_set('session.save_handler', 'user');
-        register_shutdown_function('session_write_close');
-    }
+    use SessionManager\HasSessionTrait;
+    use SessionManager\HasStorageTrait;
 
     public function init()
     {
@@ -33,50 +17,34 @@ class SessionManager
         $this->start($id);
     }
 
-    /**
-     * Gets the session ID from REQUEST
-     * @return int
-     */
-    public function checkRequestId()
-    {
-        if (isset($_REQUEST['session_id'])) {
-            return $_REQUEST['session_id'];
-        }
-
-        return false;
-    }
-
-    /**
-     * Starts the session, with optional session id
-     * @param string|boolean $id
-     */
-    protected function start($id = false)
-    {
-        if ($id) {
-            session_id($id);
-        }
-        session_start();
-    }
+//    /**
+//     * Gets the session ID from REQUEST
+//     * @return int
+//     */
+//    public function checkRequestId()
+//    {
+//        if (isset($_REQUEST['session_id'])) {
+//            return $_REQUEST['session_id'];
+//        }
+//
+//        return false;
+//    }
 
     /**
-     * Restarts the session, with new optional session id
-     *
-     * @param string|boolean $id
+     * @deprecated
      */
     public function reinitialize($id = false)
     {
-        session_write_close();
-        $this->start($id);
+//        $this->getSession()->save();
     }
 
     /**
      * Public method to return the session id
      * @return string
-     * @todo implement a verification method ( ex: adding another validation string in the sessionID )
      */
-    public function getId()
+    public function getId(): string
     {
-        return session_id();
+        return $this->getSession()->getId();
     }
 
     /**
@@ -85,9 +53,7 @@ class SessionManager
      */
     public function setLifetime($lifetime)
     {
-        if ($lifetime && is_numeric($lifetime)) {
-            $this->_lifetime = $lifetime;
-        }
+        $this->getStorage()->setOptions(['cookie_lifetime' => $lifetime]);
 
         return $this;
     }
@@ -100,14 +66,11 @@ class SessionManager
         if ($domain !== 'localhost') {
             ini_set('session.cookie_domain', '.' . $domain);
         }
-
-        CookieJar::instance()->setDefaults(
-            ['domain' => '.' . $domain]
-        );
+        $this->getStorage()->setOptions(['cookie_domain' => $domain]);
     }
 
     /**
-     * @return bool
+     * @deprecated
      */
     public function isAutoStart()
     {
