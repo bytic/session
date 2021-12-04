@@ -1,16 +1,16 @@
 <?php
 
-namespace Nip\Session\Middleware;
+namespace Bytic\Session\Middleware;
 
-use Nip\Http\ServerMiddleware\Middlewares\ServerMiddlewareInterface;
-use Nip\Session\SessionManager;
+use Bytic\Http\ServerMiddleware\Middlewares\ServerMiddlewareInterface;
+use Bytic\Session\SessionManager;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 /**
  * Class StartSession
- * @package Nip\Session\Middleware
+ * @package Bytic\Session\Middleware
  */
 class StartSession implements ServerMiddlewareInterface
 {

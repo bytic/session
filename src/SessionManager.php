@@ -1,10 +1,10 @@
 <?php
 
-namespace Nip\Session;
+namespace Bytic\Session;
 
 /**
  * Class SessionManager
- * @package Nip\Session
+ * @package Bytic\Session
  */
 class SessionManager
 {

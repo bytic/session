@@ -20,7 +20,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Nip\\Session\\Tests\\": "tests/src"
+      "Bytic\\Session\\Tests\\": "tests/src"
     }
   },
   "require": {
@@ -31,6 +31,6 @@
   "require-dev": {
     "bytic/phpqatools": "^1.0",
     "bytic/phpqaconfig": "^1.0",
-    "bytic/http": "^1.0"
+    "bytic/http": "^2.0"
   }
 }

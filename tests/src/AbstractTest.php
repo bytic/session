@@ -1,14 +1,13 @@
 <?php
 
-namespace Nip\Session\Tests\src;
+namespace Bytic\Session\Tests;
 
 use PHPUnit\Framework\TestCase;
 
 /**
  * Class AbstractTest
- * @package Nip\Locale\Tests
+ * @package Bytic\Session\Tests
  */
 abstract class AbstractTest extends TestCase
 {
-    protected $object;
 }

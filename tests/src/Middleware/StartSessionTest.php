@@ -1,17 +1,16 @@
 <?php
 
-namespace Nip\Session\Tests\src\Middleware;
+namespace Bytic\Session\Tests\Middleware;
 
-use Nip\Http\Request;
-use Nip\Http\Response\Response;
-use Nip\Http\ServerMiddleware\Dispatcher;
-use Nip\Session\Middleware\StartSession;
-use Nip\Session\SessionManager;
-use Nip\Session\Tests\src\AbstractTest;
+use Bytic\Session\Middleware\StartSession;
+use Bytic\Session\SessionManager;
+use Bytic\Session\Tests\AbstractTest;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class DebugbarMiddlewareTest
- * @package Nip\DebugBar\Tests\Middleware
+ * @package Bytic\DebugBar\Tests\Middleware
  */
 class StartSessionTest extends AbstractTest
 {

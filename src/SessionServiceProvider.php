@@ -1,13 +1,13 @@
 <?php
 
-namespace Nip\Session;
+namespace Bytic\Session;
 
-use Nip\Container\ServiceProviders\Providers\AbstractSignatureServiceProvider;
-use Nip\Session\Middleware\StartSession;
+use Bytic\Container\ServiceProviders\Providers\AbstractSignatureServiceProvider;
+use Bytic\Session\Middleware\StartSession;
 
 /**
  * Class MailServiceProvider
- * @package Nip\Mail
+ * @package Bytic\Mail
  */
 class SessionServiceProvider extends AbstractSignatureServiceProvider
 {
