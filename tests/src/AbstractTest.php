@@ -1,12 +1,13 @@
 <?php
 
-namespace Nip\Session\Tests\src;
+declare(strict_types=1);
 
-use PHPUnit\Framework\TestCase;
+namespace Bytic\Session\Tests;
+
+use Bytic\Phpqa\PHPUnit\TestCase;
 
 /**
- * Class AbstractTest
- * @package Nip\Locale\Tests
+ * Class AbstractTest.
  */
 abstract class AbstractTest extends TestCase
 {

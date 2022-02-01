@@ -1,6 +1,8 @@
 <?php
 
-namespace Nip\Session\SessionManager;
+declare(strict_types=1);
+
+namespace Bytic\Session\SessionManager;
 
 use Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage;
 use Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface;
