@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bytic\Session;
 
 /**
@@ -39,8 +41,7 @@ class SessionManager
     }
 
     /**
-     * Public method to return the session id
-     * @return string
+     * Public method to return the session id.
      */
     public function getId(): string
     {
@@ -49,6 +50,7 @@ class SessionManager
 
     /**
      * @param int $lifetime
+     *
      * @return $this
      */
     public function setLifetime($lifetime)
@@ -63,7 +65,7 @@ class SessionManager
      */
     public function setRootDomain($domain)
     {
-        if ($domain !== 'localhost') {
+        if ('localhost' !== $domain) {
             ini_set('session.cookie_domain', '.' . $domain);
         }
         $this->getStorage()->setOptions(['cookie_domain' => $domain]);
@@ -74,6 +76,6 @@ class SessionManager
      */
     public function isAutoStart()
     {
-        return ini_get('session.auto_start') && (strtolower(ini_get('session.auto_start')) == 'on');
+        return ini_get('session.auto_start') && ('on' == strtolower(ini_get('session.auto_start')));
     }
 }

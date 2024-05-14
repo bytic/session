@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bytic\Session\Tests\Middleware;
 
 use Bytic\Session\Middleware\StartSession;
@@ -16,14 +18,15 @@ class StartSessionTest extends AbstractTest
 {
     public function testProcess()
     {
-        $sessionManager = new SessionManager();
+        $manager = new SessionManager();
 
         $dispatcher = new Dispatcher(
             [
-                new StartSession($sessionManager),
+                new StartSession($manager),
                 function () {
                     $response = new Response();
                     $response->setContent('Hello World');
+
                     return $response;
                 },
             ]

@@ -1,12 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bytic\Session\Tests;
 
-use PHPUnit\Framework\TestCase;
+use Bytic\Phpqa\PHPUnit\TestCase;
 
 /**
- * Class AbstractTest
- * @package Bytic\Session\Tests
+ * Class AbstractTest.
  */
 abstract class AbstractTest extends TestCase
 {

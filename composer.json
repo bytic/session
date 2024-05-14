@@ -1,18 +1,30 @@
 {
   "name": "bytic/session",
-  "type": "library",
   "description": "Php Framework",
-  "homepage": "https://github.com/bytic/session",
   "license": "MIT",
+  "type": "library",
   "authors": [
     {
       "name": "Gabriel Solomon",
       "email": "hello@gabrielsolomon.ro"
     }
   ],
+  "homepage": "https://github.com/bytic/session",
+  "require": {
+    "php": "^7.2 || ^8.0",
+    "bytic/package-base": "^1.0",
+    "symfony/http-foundation": "^4.0 || ^5.0 || ^6.0"
+  },
+  "require-dev": {
+    "bytic/http": "^1.0 || ^2.0",
+    "bytic/phpqatools": "^1.0"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "autoload": {
     "psr-4": {
-      "Nip\\Session\\": "src"
+      "Nip\\Session\\": "legacy",
+      "Bytic\\Session\\": "src"
     },
     "classmap": [
       "legacy"
@@ -23,14 +35,12 @@
       "Bytic\\Session\\Tests\\": "tests/src"
     }
   },
-  "require": {
-    "php": "^7.1|^8.0",
-    "bytic/package-base": "^1.0",
-    "symfony/http-foundation": "^4.0|^5.0"
-  },
-  "require-dev": {
-    "bytic/phpqatools": "^1.0",
-    "bytic/phpqaconfig": "^1.0",
-    "bytic/http": "^2.0"
+  "config": {
+    "allow-plugins": {
+      "phpstan/extension-installer": true,
+      "ergebnis/composer-normalize": true,
+      "dealerdirect/phpcodesniffer-composer-installer": true,
+      "bytic/phpqatools": true
+    }
   }
 }

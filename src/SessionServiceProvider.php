@@ -1,20 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bytic\Session;
 
-use Bytic\Container\ServiceProviders\Providers\AbstractSignatureServiceProvider;
 use Bytic\Session\Middleware\StartSession;
+use Bytic\Container\ServiceProviders\Providers\AbstractSignatureServiceProvider;
 
 /**
- * Class MailServiceProvider
- * @package Bytic\Mail
+ * Class MailServiceProvider.
  */
 class SessionServiceProvider extends AbstractSignatureServiceProvider
 {
-    public const SERVICE_START = 'session';
+    public const SESSION_SERVICE = 'session';
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function register()
     {
@@ -29,14 +30,14 @@ class SessionServiceProvider extends AbstractSignatureServiceProvider
      */
     protected function registerSessionManager()
     {
-        $this->getContainer()->share(self::SERVICE_START, SessionManager::class);
+        $this->getContainer()->share(self::SESSION_SERVICE, SessionManager::class);
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function provides(): array
     {
-        return [self::SERVICE_START];
+        return [self::SESSION_SERVICE];
     }
 }

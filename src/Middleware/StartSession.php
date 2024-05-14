@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bytic\Session\Middleware;
 
-use Bytic\Http\ServerMiddleware\Middlewares\ServerMiddlewareInterface;
 use Bytic\Session\SessionManager;
+use Bytic\Http\Request;
+use Bytic\Http\ServerMiddleware\Middlewares\ServerMiddlewareInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -14,7 +17,6 @@ use Psr\Http\Server\RequestHandlerInterface;
  */
 class StartSession implements ServerMiddlewareInterface
 {
-
     /**
      * The session manager.
      *
@@ -31,8 +33,6 @@ class StartSession implements ServerMiddlewareInterface
 
     /**
      * Create a new session middleware.
-     *
-     * @param SessionManager $manager
      */
     public function __construct(SessionManager $manager)
     {
@@ -40,7 +40,7 @@ class StartSession implements ServerMiddlewareInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
@@ -57,16 +57,20 @@ class StartSession implements ServerMiddlewareInterface
     /**
      * Start the session for the given request.
      *
-     * @param ServerRequestInterface $request
+     * @param ServerRequestInterface|Request $request
      */
     protected function startSession(ServerRequestInterface $request)
     {
-        $request->setSessionFactory(
-            function () use ($request) {
-                $session = $this->manager->getSession();
-                if ($request->isCLI() == false) {
-                    $requestHTTP = $request->getHttp();
-                    $domain = $requestHTTP->getRootDomain();
+        $session = $this->manager->getSession();
+//        if (!$session->isStarted()) {
+//            $session->start();
+//        }
+        $request->setSession($session);
+//        $request->setSessionFactory(
+//            function () use ($request) {
+//                if ($request->isCLI() == false) {
+//                    $requestHTTP = $request->getHttp();
+//                    $domain = $requestHTTP->getRootDomain();
 
 //            if (!$sessionManager->isAutoStart()) {
 //                $sessionManager->setRootDomain($domain);
@@ -79,19 +83,16 @@ class StartSession implements ServerMiddlewareInterface
 //                );
 //            }
 //            $sessionManager->init();
-                }
-                if ($session && !$session->isStarted()) {
-                    $sessionId = $request->cookies->get($session->getName(), '');
-                    $session->setId($sessionId);
-                }
-                return $session;
-            }
-        );
+//                }
+//                if ($session && !$session->isStarted()) {
+//                    $sessionId = $request->cookies->get($session->getName(), '');
+//                    $session->setId($sessionId);
+//                }
+//                return $session;
+//            }
+//        );
     }
 
-    /**
-     * @return SessionManager
-     */
     public function getManager(): SessionManager
     {
         return $this->manager;
