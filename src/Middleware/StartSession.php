@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Bytic\Session\Middleware;
 
-use Bytic\Session\SessionManager;
 use Bytic\Http\Request;
-use Bytic\Http\ServerMiddleware\Middlewares\ServerMiddlewareInterface;
+use Bytic\Session\SessionManager;
+use Nip\Http\ServerMiddleware\Middlewares\ServerMiddlewareInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;

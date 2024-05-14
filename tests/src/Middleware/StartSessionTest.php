@@ -7,8 +7,9 @@ namespace Bytic\Session\Tests\Middleware;
 use Bytic\Session\Middleware\StartSession;
 use Bytic\Session\SessionManager;
 use Bytic\Session\Tests\AbstractTest;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Nip\Http\Request;
+use Nip\Http\Response\Response;
+use Nip\Http\ServerMiddleware\Dispatcher;
 
 /**
  * Class DebugbarMiddlewareTest
