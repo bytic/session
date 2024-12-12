@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Bytic\Session;
+namespace Nip\Session;
 
 use Bytic\Session\Middleware\StartSession;
 use Nip\Container\ServiceProviders\Providers\AbstractSignatureServiceProvider;

@@ -24,7 +24,7 @@
   "autoload": {
     "psr-4": {
       "Nip\\Session\\": "legacy",
-      "Bytic\\Session\\": "src"
+      "Nip\\Session\\": "src"
     },
     "classmap": [
       "legacy"

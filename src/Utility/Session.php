@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Bytic\Session\Utility;
+namespace Nip\Session\Utility;
 
-use Bytic\Session\SessionManager;
-use Bytic\Session\SessionServiceProvider;
 use Nip\Container\Utility\Container;
+use Nip\Session\SessionManager;
+use Nip\Session\SessionServiceProvider;
 
 /**
  *

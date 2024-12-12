@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Bytic\Session;
+namespace Nip\Session;
 
 /**
  * Class SessionManager.

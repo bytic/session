@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Bytic\Session\SessionManager;
+namespace Nip\Session\SessionManager;
 
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
