@@ -7,6 +7,7 @@ namespace Bytic\Session\Utility;
 use Bytic\Session\SessionManager;
 use Bytic\Session\SessionServiceProvider;
 use Nip\Container\Utility\Container;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  *
@@ -21,22 +22,7 @@ class Session
      */
     public static function get($key, $default = null)
     {
-        return static::session()->getSession()->get($key, $default);
-    }
-
-    /**
-     * @return SessionManager|null
-     */
-    protected static function session()
-    {
-        /** @var SessionManager|null $session */
-        static $session = null;
-        if (null === $session) {
-            $session = Container::container()
-                ->get(SessionServiceProvider::SESSION_SERVICE);
-        }
-
-        return $session;
+        return static::session()->set($key, $default);
     }
 
     /**
@@ -46,6 +32,33 @@ class Session
      */
     public static function set(string $name, $value)
     {
-        return static::session()->getSession()->get($name, $value);
+        return static::session()->get($name, $value);
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Session\Session|SessionInterface|null
+     */
+    public static function session()
+    {
+        return static::sessionManager()->getSession();
+    }
+
+    public static function sessionManager(): ?SessionManager
+    {
+        /** @var SessionManager|null $manager */
+        static $manager = null;
+        if (null === $manager) {
+            $manager = self::sessionManagerGenerate();
+        }
+        return $manager;
+    }
+
+    /**
+     * @return SessionManager|null
+     */
+    protected static function sessionManagerGenerate(): ?SessionManager
+    {
+        return Container::container()
+            ->get(SessionServiceProvider::SESSION_SERVICE);
     }
 }

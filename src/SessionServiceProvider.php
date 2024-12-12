@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Bytic\Session;
 
 use Bytic\Session\Middleware\StartSession;
-use Bytic\Container\ServiceProviders\Providers\AbstractSignatureServiceProvider;
+use Nip\Container\ServiceProviders\Providers\AbstractSignatureServiceProvider;
 
 /**
  * Class MailServiceProvider.

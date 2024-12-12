@@ -62,10 +62,10 @@ class StartSession implements ServerMiddlewareInterface
     protected function startSession(ServerRequestInterface $request)
     {
         $session = $this->manager->getSession();
-//        if (!$session->isStarted()) {
-//            $session->start();
-//        }
         $request->setSession($session);
+        if (!$session->isStarted()) {
+            $session->start();
+        }
 //        $request->setSessionFactory(
 //            function () use ($request) {
 //                if ($request->isCLI() == false) {
@@ -96,5 +96,10 @@ class StartSession implements ServerMiddlewareInterface
     public function getManager(): SessionManager
     {
         return $this->manager;
+    }
+
+    public function __destruct()
+    {
+        $this->manager->getSession()->save();
     }
 }
